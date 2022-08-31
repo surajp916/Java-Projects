@@ -1,0 +1,102 @@
+package first;
+
+import java.util.Scanner;
+
+public class tictactoe {
+
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in); 
+		char[][] board = new char[3][3]; 
+		
+		System.out.println("Welcome to Tic-Tac-Toe\nThis is the start: "); 
+		int next = 0; 
+		for(int r = 0; r < board.length; r++) {
+			for(int c = 0; c < board[0].length; c++) {
+				System.out.print(board[r][c]);
+				if(next == 2) {
+					System.out.println(); 
+				}
+				next++; 
+			}
+			next = 0; 
+		}
+	System.out.println("-----------------------------------------"); 
+	boolean complete = false; 
+	int count = 1; 
+	int piece = 1; 
+	while(!complete && count <= 9) { 
+		
+		if(piece%2 != 0) { 
+			System.out.println("Enter the row you want to place your 'X'"); 
+			int rowx = input.nextInt(); 
+			
+			System.out.println("Enter the column you want to place your 'X'"); 
+			int colx = input.nextInt(); 
+			
+			board[rowx][colx] = 'X';
+		}
+		else if(piece%2 == 0) {
+			System.out.println("Enter the row you want to place your '0'"); 
+			int rowo = input.nextInt(); 
+			
+			System.out.println("Enter the column you want to place your '0'"); 
+			int colo = input.nextInt(); 
+			
+			board[rowo][colo] = '0'; 
+		}
+		System.out.println("-------------------------------------"); 
+		System.out.println("-------------------------------------");
+		
+		int nextl = 0; 
+		for(int r = 0; r < board.length; r++) {
+			for(int c = 0; c < board[0].length; c++) {
+				System.out.print(board[r][c]);
+				if(nextl == 2) {
+					System.out.println(); 
+				}
+				nextl++; 
+			}
+			nextl = 0; 
+		}
+		
+		char check = checkwin(board); 
+		
+		if(check == 'X') {
+			complete = true; 
+			System.out.println("Game Over!!!!!\n X wins"); 
+		}
+		else if(check == '0') {
+			complete = true; 
+			System.out.println("Game Over!!!!!\n 0 wins"); 
+		}
+		if(count == 9 && check == ' ') {
+			complete = true; 
+			System.out.println("Tie!!!!!!!!");
+		}
+		count++; 
+		piece++; 
+		
+		}
+	}
+	
+	public static char checkwin(char[][] arr) {
+		for(int r = 0; r < arr.length; r++) {
+			if(arr[r][0] == arr[r][1] && arr[r][1] == arr[r][2]) {
+				return arr[r][0]; 
+			}
+		}
+		for(int c = 0; c < arr[0].length; c++) {
+			if(arr[0][c] == arr[1][c] && arr[1][c] == arr[2][c]) {
+				return arr[0][c]; 
+			}
+		}
+		if(arr[0][0] == arr[1][1] && arr[1][1] == arr[2][2]) {
+			return arr[0][0]; 
+		}
+		if(arr[2][0] == arr[1][1] && arr[1][1] == arr[0][2]) {
+			return arr[2][0]; 
+		}
+		return ' '; 
+	}
+}
+
